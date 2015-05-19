@@ -11,6 +11,16 @@ class RestApiMethod
 
     public static function run($version, array $params = [])
     {
+        if (is_int($version))
+        {
+            $version .= '.00';
+        }
+
+        if (!is_float($version))
+        {
+            throw new InvalidVersionRestException();
+        }
+
         list($majorVersion, $minorVersion) = explode(".", $version);
 
         if (empty($majorVersion) || empty($minorVersion))
