@@ -5,23 +5,16 @@ use Okapi\Exceptions\MethodNotExistsRestException;
 
 class RestApiMethod
 {
-    public static $name = 'restApiMethod';
-
     protected static $versionsConfig = [];
 
     public static function run($version, array $params = [])
     {
-        if (is_int($version))
+        if (strpos($version, '.') === false)
         {
             $version .= '.00';
         }
 
-        if (!is_float($version))
-        {
-            throw new InvalidVersionRestException();
-        }
-
-        list($majorVersion, $minorVersion) = explode(".", $version);
+        list($majorVersion, $minorVersion) = explode('.', $version);
 
         if (empty($majorVersion) || empty($minorVersion))
         {

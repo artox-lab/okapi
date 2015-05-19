@@ -4,8 +4,6 @@ use Okapi\Core\RestApiMethod;
 
 class ExampleMethod extends RestApiMethod
 {
-    public static $name = 'orders';
-
     protected static $versionsConfig = [
         '1' => [
             '00' => 'run_1_00',
