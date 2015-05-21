@@ -4,41 +4,35 @@ use Okapi\Core\RestApiMethod;
 
 class ExampleMethod extends RestApiMethod
 {
-    protected static $versionsConfig = [
-        '1' => [
-            '00' => 'run_1_00',
-            '03' => 'run_1_03'
-        ],
-        '3' => [
-            '00' => 'run_3_00',
-            '21' => 'run_3_21',
-            '22' => 'run_3_22'
-        ],
-        '4' => false
+    protected $versionsConfig = [
+        1 => [0, 3],
+        3 => [0, 21, 23],
+        4 => [0],
+        5 => false
     ];
 
-    protected static function run_1_00()
+    protected function run_1_0()
     {
-        return '1.00';
+        return '1.0';
     }
 
-    protected static function run_1_03()
+    protected function run_1_3()
     {
-        return '1.03';
+        return '1.3';
     }
 
-    protected static function run_3_00()
+    protected function run_3_0()
     {
-        return '3.00';
+        return '3.0';
     }
 
-    protected static function run_3_21()
+    protected function run_3_21()
     {
         return '3.21';
     }
 
-    protected static function run_3_22()
+    protected function run_3_23()
     {
-        return '3.22';
+        return '3.23';
     }
 }
