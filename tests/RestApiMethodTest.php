@@ -43,7 +43,7 @@ class RestApiMethodTest extends PHPUnit_Framework_TestCase
     {
         $method = new ExampleMethod();
 
-        $invalidVersions = array(0, 0.0, '0.0', '0.1', -3.0, 'version');
+        $invalidVersions = array(0, 0.0, '0.0', '0.1', -3.0, 'version', '4.0');
         $exceptionCount = 0;
 
         foreach($invalidVersions as $version) {
@@ -74,6 +74,6 @@ class RestApiMethodTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('\Okapi\Exceptions\MethodNotExistsRestException');
 
         $method = new ExampleMethod();
-        $method->run('4');
+        $method->run('4.1');
     }
 }

@@ -7,7 +7,7 @@ class ExampleMethod extends RestApiMethod
     protected $versionsConfig = [
         1 => [0, 3],
         3 => [0, 21, 23],
-        4 => [0],
+        4 => [1],
         5 => false
     ];
 
