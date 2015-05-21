@@ -5,4 +5,4 @@
 [![Latest Stable Version](https://poser.pugx.org/artoxlab/okapi/v/stable.svg)](https://packagist.org/packages/artoxlab/okapi)
 [![Total Downloads](https://poser.pugx.org/artoxlab/okapi/d/total.svg)](https://packagist.org/packages/artoxlab/okapi)
 
-![Okapi](http://fc01.deviantart.net/fs70/f/2011/333/7/3/okapi_doodle_by_mbpanther-d4hp7o7.png)
+![Okapi](http://fc08.deviantart.net/fs71/i/2012/034/e/7/mlp_okapi_by_shinylugiacat-d4okzjv.jpg)
