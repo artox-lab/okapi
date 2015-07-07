@@ -3,6 +3,7 @@
 use Okapi\Exceptions\InvalidVersionRestException;
 use Okapi\Exceptions\MethodDeprecatedRestException;
 use Okapi\Exceptions\MethodNotExistsRestException;
+use Okapi\Exceptions\WrongMethodArgumentsRestException;
 
 abstract class RestApiMethod
 {
@@ -51,12 +52,42 @@ abstract class RestApiMethod
 
         $method = $this->getMethodName($actualMajor, $actualMinor);
 
-        if (!method_exists(get_called_class(), $method))
+        return $this->runMethod($method, $params);
+    }
+
+    /**
+     * @param $methodName
+     * @param $arguments
+     *
+     * @return mixed
+     * @throws MethodNotExistsRestException
+     * @throws WrongMethodArgumentsRestException
+     */
+    private function runMethod($methodName, $arguments)
+    {
+        if (!method_exists(get_called_class(), $methodName))
         {
             throw new MethodNotExistsRestException();
         }
 
-        return call_user_func_array([$this, $method], $params);
+        $reflector = new \ReflectionMethod(get_called_class(), $methodName);
+        $params = $reflector->getParameters();
+        $values = [];
+
+        foreach ($params as $param)
+        {
+            $name = $param->getName();
+            $isArgumentGiven = array_key_exists($name, $arguments);
+            if (!$isArgumentGiven && !$param->isDefaultValueAvailable())
+            {
+                throw new WrongMethodArgumentsRestException();
+            }
+
+            $values[$param->getPosition()] =
+                $isArgumentGiven ? $arguments[$name] : $param->getDefaultValue();
+        }
+
+        return call_user_func_array([$this, $methodName], $values);
     }
 
     /**

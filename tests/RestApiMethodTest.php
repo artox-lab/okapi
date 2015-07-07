@@ -1,6 +1,7 @@
 <?php
 
 use Okapi\Example\ExampleMethod;
+use Okapi\Example\ExampleMethod2;
 
 class RestApiMethodTest extends PHPUnit_Framework_TestCase
 {
@@ -9,6 +10,7 @@ class RestApiMethodTest extends PHPUnit_Framework_TestCase
         $method = new ExampleMethod();
 
         $result = $method->run(1);
+
         $this->assertEquals('1.0', $result);
 
         $result = $method->run(1.0);
@@ -75,5 +77,24 @@ class RestApiMethodTest extends PHPUnit_Framework_TestCase
 
         $method = new ExampleMethod();
         $method->run('4.1');
+    }
+
+    public function testValidMethodArguments()
+    {
+        $method = new ExampleMethod2();
+
+        $result = $method->run('1.0', [
+            'id' => 20
+        ]);
+
+        $this->assertEquals(20, $result);
+    }
+
+    public function testWrongMethodArguments()
+    {
+        $this->setExpectedException('\Okapi\Exceptions\WrongMethodArgumentsRestException');
+
+        $method = new ExampleMethod2();
+        $method->run('1.0');
     }
 }
