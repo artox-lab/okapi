@@ -1,5 +1,5 @@
 {
-  "name": "artoxlab/okapi",
+  "name": "artox-lab/okapi",
   "type": "library",
   "description": "RestAPI structure for PHP",
   "keywords": ["rest","api"],
