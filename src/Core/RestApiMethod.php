@@ -8,8 +8,12 @@ use Okapi\Exceptions\WrongMethodArgumentsRestException;
 abstract class RestApiMethod
 {
     const METHOD_MASK = 'run_%d_%d';
+    const RESPONSE_FIELD = 'response';
+    const ERRORS_FIELD = 'errors';
 
     protected $versionsConfig = [];
+
+    protected $errors = [];
 
     /**
      * @param string $version
@@ -87,7 +91,12 @@ abstract class RestApiMethod
                 $isArgumentGiven ? $arguments[$name] : $param->getDefaultValue();
         }
 
-        return call_user_func_array([$this, $methodName], $values);
+        $response = call_user_func_array([$this, $methodName], $values);
+
+        return [
+            self::ERRORS_FIELD => $this->errors ? $this->errors : null,
+            self::RESPONSE_FIELD => $response
+        ];
     }
 
     /**

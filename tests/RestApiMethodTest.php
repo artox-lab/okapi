@@ -11,34 +11,34 @@ class RestApiMethodTest extends PHPUnit_Framework_TestCase
 
         $result = $method->run(1);
 
-        $this->assertEquals('1.0', $result);
+        $this->assertEquals('1.0', $result['response']);
 
         $result = $method->run(1.0);
-        $this->assertEquals('1.0', $result);
+        $this->assertEquals('1.0', $result['response']);
 
         $result = $method->run('1');
-        $this->assertEquals('1.0', $result);
+        $this->assertEquals('1.0', $result['response']);
 
         $result = $method->run('1.0');
-        $this->assertEquals('1.0', $result);
+        $this->assertEquals('1.0', $result['response']);
 
         $result = $method->run('1.3');
-        $this->assertEquals('1.3', $result);
+        $this->assertEquals('1.3', $result['response']);
 
         $result = $method->run('3.22');
-        $this->assertEquals('3.21', $result);
+        $this->assertEquals('3.21', $result['response']);
 
         $result = $method->run('3.30');
-        $this->assertEquals('3.23', $result);
+        $this->assertEquals('3.23', $result['response']);
 
         $result = $method->run('3.20');
-        $this->assertEquals('3.0', $result);
+        $this->assertEquals('3.0', $result['response']);
 
         $result = $method->run('2.20');
-        $this->assertEquals('1.3', $result);
+        $this->assertEquals('1.3', $result['response']);
 
         $result = $method->run('1.2');
-        $this->assertEquals('1.0', $result);
+        $this->assertEquals('1.0', $result['response']);
     }
 
     public function testInvalidVersionRecognize()
@@ -87,7 +87,7 @@ class RestApiMethodTest extends PHPUnit_Framework_TestCase
             'id' => 20
         ]);
 
-        $this->assertEquals(20, $result);
+        $this->assertEquals(20, $result['response']);
     }
 
     public function testWrongMethodArguments()
