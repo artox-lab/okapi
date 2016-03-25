@@ -8,12 +8,21 @@ use Okapi\Exceptions\WrongMethodArgumentsRestException;
 abstract class RestApiMethod
 {
     const METHOD_MASK = 'run_%d_%d';
+    const METHOD_COUNT_MASK = 'run_count_%d_%d';
     const RESPONSE_FIELD = 'response';
     const ERRORS_FIELD = 'errors';
 
-    protected $versionsConfig = [];
+    const MODE_DEFAULT = 'default';
+    const MODE_COUNT = 'count';
 
+    protected $versionsConfig = [];
     protected $errors = [];
+    protected $mode = null;
+
+    public function __construct($mode = self::MODE_DEFAULT)
+    {
+        $this->mode = $mode == self::MODE_DEFAULT ? self::MODE_DEFAULT : self::MODE_COUNT;
+    }
 
     /**
      * @param string $version
@@ -107,7 +116,7 @@ abstract class RestApiMethod
      */
     private function getMethodName($majorVersion, $minorVersion)
     {
-        return sprintf(self::METHOD_MASK, $majorVersion, $minorVersion);
+        return sprintf($this->mode == self::MODE_DEFAULT ? self::METHOD_MASK : self::METHOD_COUNT_MASK, $majorVersion, $minorVersion);
     }
 
     /**
