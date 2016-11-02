@@ -102,10 +102,7 @@ abstract class RestApiMethod
 
         $response = call_user_func_array([$this, $methodName], $values);
 
-        return [
-            self::ERRORS_FIELD => $this->errors ? $this->errors : null,
-            self::RESPONSE_FIELD => $response
-        ];
+        return $this->response($response);
     }
 
     /**
@@ -142,5 +139,19 @@ abstract class RestApiMethod
         }
 
         return $returnVersion;
+    }
+
+    /**
+     * @param mixed $response
+     *
+     * @param $response
+     * @return array
+     */
+    protected function response($response = null)
+    {
+        return [
+            self::ERRORS_FIELD => $this->errors ? $this->errors : null,
+            self::RESPONSE_FIELD => $response
+        ];
     }
 }
