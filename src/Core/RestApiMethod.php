@@ -151,7 +151,7 @@ abstract class RestApiMethod
     {
         return [
             self::ERRORS_FIELD => $this->errors ? $this->errors : null,
-            self::RESPONSE_FIELD => $response
+            self::RESPONSE_FIELD => !empty($response) ? $response : null 
         ];
     }
 }
